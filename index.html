@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalviCell</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Calvicell</h2>
+        
+        <!-- Sección Nombre Establecimiento -->
+        <section>
+            <h3>Nombre del Establecimiento</h3>
+            <input type="text" id="nombreEstablecimiento" placeholder="Ej: Tienda La Bendición">
+            <button onclick="guardarNombreEstablecimiento()">Guardar Nombre</button>
+        </section>
+
+        <!-- Sección Tasa BCV -->
+        <section>
+            <h3>Tasa BCV</h3>
+            <input type="number" id="tasaBCV" placeholder="Tasa BCV" required="true">
+            <button onclick="actualizarTasaBCV()">Actualizar Tasa BCV</button>
+        </section>
+
+        <!-- Sección Datos Producto -->
+        <section>
+            <h3>Datos del Producto</h3>
+            <input type="text" id="producto" placeholder="Nombre del producto" required="true">
+            <input type="number" id="costo" placeholder="Costo del producto" required="true">
+            <select id="descripcion" required="true">
+                <option value="">Selecciona una descripción</option>
+                <option value="viveres">Víveres</option>
+                <option value="gaseosas">Gaseosas</option>
+                <option value="licores">Licores</option>
+                <option value="enlatados">Enlatados</option>
+                <option value="plasticos">Plásticos</option>
+                <option value="papeleria">Papelería</option>
+                <option value="lacteos">Lácteos</option>
+                <option value="ferreteria">Ferretería</option>
+                <option value="agropecuaria">Agropecuaria</option>
+                <option value="frigorifico">Frigorífico</option>
+                <option value="pescaderia">Pescadería</option>
+                <option value="repuesto">Repuesto</option>
+                <option value="confiteria">Confitería</option>
+                <option value="ropa">Ropa</option>
+                <option value="calzados">Calzados</option>
+                <option value="otros">Otros</option>
+            </select>
+        </section>
+
+        <!-- Sección Precio Venta -->
+        <section>
+            <h3>Precio de Venta</h3>
+            <input type="number" id="ganancia" placeholder="Porcentaje de ganancia" required="true">
+            <input type="number" id="unidades" placeholder="Unidades que trae la caja" required="true">
+            <button onclick="calcularPrecioVenta()">Calcular Precio de Venta</button>
+            <p id="resultadoPrecioVenta">Precio al mayor: </p>
+            <p id="precioUnitario">Precio unitario: </p>
+        </section>
+
+        <button onclick="guardarProducto()">Guardar Producto</button>
+    </div>
+
+    <!-- Lista de Productos -->
+    <div id="listaProductos">
+        <input type="text" id="buscar" placeholder="Buscar producto">
+        <button onclick="buscarProducto()">Buscar</button>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Descripción</th>
+                    <th>Precio Mayor ($)</th>
+                    <th>Precio Mayor (Bs)</th>
+                    <th>Precio Unitario ($)</th>
+                    <th>Precio Unitario (Bs)</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <!-- Botones de Acción -->
+        <div class="action-buttons">
+            <button onclick="generarPDF()" class="generar-pdf">Generar PDF</button>
+            <button onclick="mostrarListaCostos()" class="lista-costos">Mostrar Lista de Costos</button>
+            <button onclick="cerrarSesion()" class="btn-cerrar-sesion">🚪 Cerrar Sesión</button>
+            <button onclick="limpiarLista()" class="limpiar-lista">Limpiar Lista</button>
+        </div>
+
+        <!-- Lista de Costos (oculta por defecto) -->
+        <div id="listaCostosContainer" style="display: none;">
+            <h3>Lista de Costos de Productos</h3>
+            <button onclick="generarPDFCostos()" class="generar-pdf-costos">📄 Convertir a PDF</button>
+            <ul id="listaCostos"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
